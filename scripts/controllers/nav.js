@@ -7,8 +7,9 @@
  * # NavCtrl
  * Controller of the angularFirebaseApp
  */
- app.controller('NavCtrl', function ($scope, $mdSidenav, $mdDialog) {
+ app.controller('NavCtrl', function ($scope, $mdSidenav, $mdDialog, authService) {
     $scope.toggleSideNav = function() {
+    	var u = authService.user;
 		$mdSidenav('sideNav').toggle();
 	}
 	

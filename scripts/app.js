@@ -1,5 +1,15 @@
 'use strict';
 
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyBR8Q3WuskTxejLaI3_MU1VtUddHCC5ZUU",
+  authDomain: "fileuploadtest-44836.firebaseapp.com",
+  databaseURL: "https://fileuploadtest-44836.firebaseio.com",
+  storageBucket: "fileuploadtest-44836.appspot.com",
+  messagingSenderId: "1038127555153"
+};
+firebase.initializeApp(config);
+
 /**
  * @ngdoc overview
  * @name angularFirebaseApp
@@ -17,13 +27,13 @@ var app = angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-	'ngMaterial',
-	'ngMap'
+    'ngMaterial',
+    'ngMap'
   ])
   .config(function($mdThemingProvider) {
-	  //$mdThemingProvider.theme('default').light();
+    //$mdThemingProvider.theme('default').light();
   })
-  .config(function ($routeProvider) {
+  .config(function($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -35,7 +45,7 @@ var app = angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
-	  .when('/map', {
+      .when('/map', {
         templateUrl: 'views/map.html',
         controller: 'MapCtrl',
         controllerAs: 'map'

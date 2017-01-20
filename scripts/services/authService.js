@@ -1,5 +1,9 @@
-app.factory('authService', function($mdDialog) {
+app.factory('authService', function($rootScope, $q, $mdDialog) {
     var provider, user;
+    
+    if(firebase.auth().currentUser) {
+        this.user = firebase.auth().currentUser;
+    }
 
     var logInWithProvider = function(providerName) {
         switch(providerName) {
@@ -36,7 +40,8 @@ app.factory('authService', function($mdDialog) {
 
             $mdDialog.show(
                 $mdDialog.alert()
-                    .targetEvent(originatorEv)
+                    //.targetEvent(originatorEv)
+                    .targetEvent()
                     .clickOutsideToClose(true)
                     .parent('body')
                     .title('Error Authenticating')
@@ -44,29 +49,20 @@ app.factory('authService', function($mdDialog) {
                     .ok('Close')
             );
 
-            originatorEv = null;
-        });
-
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-                this.user = result.user;
-            } else {
-                this.user = null;
-            }
+            //originatorEv = null;
         });
     };
 
     var logOut = function() {
         firebase.auth().signOut().then(function() {
-            // Sign out successfully
+            $rootScope.$broadcast('handleAuth', user);
         }, function(error) {
-            // An error happened
+            alert(error);
         });
     };
 
     return {
         logInWithProvider: logInWithProvider,
-        logOut: logOut,
-        user: user
+        logOut: logOut
     };
 });

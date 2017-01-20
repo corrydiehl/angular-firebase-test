@@ -1,10 +1,10 @@
-<html lang="en" >
+<html lang="en">
+
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Angular Material style sheet -->
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
   <style>
     /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -20,8 +20,11 @@
       margin: 0;
       padding: 0;
     }
-	.angular-google-map-container { height: 100%; }
-
+    
+    .angular-google-map-container {
+      height: 100%;
+    }
+    
     .img-icon {
       height: 48px;
       width: 48px;
@@ -33,86 +36,85 @@
     }
   </style>
 </head>
+
 <body ng-app="angularFirebaseApp" ng-cloak>
 
-	<div ng-controller="NavCtrl">
-		<md-toolbar>
-		  <div class="md-toolbar-tools">
-			<md-button class="md-icon-button" aria-label="Settings" ng-click="toggleSideNav()">
-			  <md-icon class="material-icons md-light">reorder</md-icon>
-			</md-button>
-			<h2>
-			  <span>Angular + Firebase</span>
-			</h2>
-			<span flex></span>
-      
-			<!--<md-button class="md-icon-button" aria-label="Login">
-			  <md-icon class="material-icons md-light">perm_identity</md-icon>
-			</md-button>-->
-      <div ng-controller="AuthCtrl" >
-      <md-menu ng-if="!authService.user">
-        <md-button class="md-fab md-warn md-mini" aria-label="Login" ng-click="openMenu($mdOpenMenu, $event)">
-          <md-icon md-menu-origin class="material-icons md-light">account_circle</md-icon>
+  <div ng-controller="NavCtrl">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleSideNav()">
+          <md-icon class="material-icons md-light">reorder</md-icon>
         </md-button>
-        <md-menu-content width="3">
-          <md-menu-item>
-            <md-button ng-click="logInWithProvider('google')">
-              <md-icon md-svg-src="images/auth_service_google.svg"></md-icon> Google
-            </md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button ng-click="logInWithProvider('facebook')" disabled="disabled">
-              <md-icon md-svg-src="images/auth_service_facebook.svg"></md-icon> Facebook
-            </md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button ng-click="logInWithProvider('twitter')" disabled="disabled">
-              <md-icon md-svg-src="images/auth_service_twitter.svg"></md-icon> Twitter
-            </md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button ng-click="logInWithProvider('github')" disabled="disabled">
-              <md-icon md-svg-src="images/auth_service_github.svg"></md-icon> Github
-            </md-button>
-          </md-menu-item>
-        </md-menu-content>
-      </md-menu>
+        <h2>
+          <span>Angular + Firebase</span>
+        </h2>
+        <span flex></span>
 
-      <md-menu ng-if="authService.user">
-        <md-button class="md-fab md-warn md-mini" aria-label="Login" ng-click="openMenu($mdOpenMenu, $event)">
-          <img src="https://lh5.googleusercontent.com/-7vQAEMjVsn0/AAAAAAAAAAI/AAAAAAAAAjw/SxVXh_AYMIs/photo.jpg?sz=64" class="img-icon">
-        </md-button>
-        <md-menu-content width="3">
-          <md-menu-item>
-            <md-button ng-click="authService.logOut()">Sign Out</md-button>
-          </md-menu-item>
-        </md-menu-content>
-      </md-menu>
+        <div ng-controller="AuthCtrl">
+          <md-menu ng-show="!user">
+            <md-button class="md-fab md-warn md-mini" aria-label="Login" ng-click="openMenu($mdOpenMenu, $event)">
+              <md-icon md-menu-origin class="material-icons md-light">account_circle</md-icon>
+            </md-button>
+            <md-menu-content width="3">
+              <md-menu-item>
+                <md-button ng-click="logInWithProvider('google')">
+                  <md-icon md-svg-src="images/auth_service_google.svg"></md-icon> Google
+                </md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-click="logInWithProvider('facebook')" disabled="disabled">
+                  <md-icon md-svg-src="images/auth_service_facebook.svg"></md-icon> Facebook
+                </md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-click="logInWithProvider('twitter')" disabled="disabled">
+                  <md-icon md-svg-src="images/auth_service_twitter.svg"></md-icon> Twitter
+                </md-button>
+              </md-menu-item>
+              <md-menu-item>
+                <md-button ng-click="logInWithProvider('github')" disabled="disabled">
+                  <md-icon md-svg-src="images/auth_service_github.svg"></md-icon> Github
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+
+          <md-menu ng-show="user">
+            <md-button class="md-fab md-warn md-mini" aria-label="Login" ng-click="openMenu($mdOpenMenu, $event)">
+              <img src="https://lh5.googleusercontent.com/-7vQAEMjVsn0/AAAAAAAAAAI/AAAAAAAAAjw/SxVXh_AYMIs/photo.jpg?sz=64" class="img-icon">
+            </md-button>
+            <md-menu-content width="3">
+              <md-menu-item>
+                <md-button ng-click="logOut()">Sign Out</md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </div>
+        
       </div>
-		  </div>
-		</md-toolbar>
-		
-		<section>
-			<md-sidenav class="md-sidenav-left" md-component-id="sideNav" md-whiteframe="4">
-				<md-toolbar>
-					<div class="md-toolbar-tools">
-					<h2>
-					  <span>Navigation</span>
-					</h2>
-					<span flex></span>
-					<md-button class="md-icon-button" aria-label="Clear" ng-click="closeNav()">
-					  <md-icon class="material-icons md-light">clear</md-icon>
-					</md-button>
-				  </div>
-				  </md-toolbar>
-				<md-content layout-margin>
-					<p>SIDE NAV!</p>
-				</md-content>
-			</md-sidenav>
-		</section>
-	</div>
-	
-	<md-content ng-view></md-content>
+    </md-toolbar>
+
+    <section>
+      <md-sidenav class="md-sidenav-left" md-component-id="sideNav" md-whiteframe="4">
+        <md-toolbar>
+          <div class="md-toolbar-tools">
+            <h2>
+              <span>Navigation</span>
+            </h2>
+            <span flex></span>
+            <md-button class="md-icon-button" aria-label="Clear" ng-click="closeNav()">
+              <md-icon class="material-icons md-light">clear</md-icon>
+            </md-button>
+          </div>
+        </md-toolbar>
+        <md-content layout-margin>
+          <p>SIDE NAV!</p>
+        </md-content>
+      </md-sidenav>
+    </section>
+  </div>
+
+  <md-content ng-view></md-content>
 
   <div style="visibility: hidden">
     <div class="md-dialog-container" id="myDialog">
@@ -129,17 +131,6 @@
   </div>
 
   <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyBR8Q3WuskTxejLaI3_MU1VtUddHCC5ZUU",
-      authDomain: "fileuploadtest-44836.firebaseapp.com",
-      databaseURL: "https://fileuploadtest-44836.firebaseio.com",
-      storageBucket: "fileuploadtest-44836.appspot.com",
-      messagingSenderId: "1038127555153"
-    };
-    firebase.initializeApp(config);
-  </script>
 
   <!-- Angular Material requires Angular.js Libraries -->
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
@@ -153,19 +144,20 @@
 
   <!-- Angular Material Library -->
   <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-  
+
   <script src="https://maps.google.com/maps/api/js?key=AIzaSyBMPM0ysjkEUwHRqUcrs6Nz2kDTO7MaQLE&libraries=placeses,visualization,drawing,geometry,places"></script>
-  
-  
+
+
   <script src="scripts/mapStyles.js"></script>
   <script src="scripts/ng-map.js"></script>
-  
+
   <script src="scripts/app.js"></script>
+  <script src="scripts/services/authService.js"></script>
   <script src="scripts/controllers/nav.js"></script>
   <script src="scripts/controllers/auth.js"></script>
-  <script src="scripts/services/authService.js"></script>
   <script src="scripts/controllers/main.js"></script>
   <script src="scripts/controllers/about.js"></script>
   <script src="scripts/controllers/map.js"></script>
 </body>
+
 </html>
