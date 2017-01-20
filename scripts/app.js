@@ -18,6 +18,7 @@ firebase.initializeApp(config);
  *
  * Main module of the application.
  */
+ 
 var app = angular
   .module('angularFirebaseApp', [
     'ngAnimate',
@@ -54,3 +55,4 @@ var app = angular
         redirectTo: '/'
       });
   });
+  

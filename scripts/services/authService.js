@@ -60,9 +60,14 @@ app.factory('authService', function($rootScope, $q, $mdDialog) {
             alert(error);
         });
     };
+    
+    var getUser = function() {
+        return firebase.auth().currentUser;
+    }
 
     return {
         logInWithProvider: logInWithProvider,
-        logOut: logOut
+        logOut: logOut,
+        getUser: getUser
     };
 });

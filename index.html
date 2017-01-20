@@ -62,17 +62,17 @@
                 </md-button>
               </md-menu-item>
               <md-menu-item>
-                <md-button ng-click="logInWithProvider('facebook')" disabled="disabled">
+                <md-button ng-click="logInWithProvider('facebook')" ng-disabled="true">
                   <md-icon md-svg-src="images/auth_service_facebook.svg"></md-icon> Facebook
                 </md-button>
               </md-menu-item>
               <md-menu-item>
-                <md-button ng-click="logInWithProvider('twitter')" disabled="disabled">
+                <md-button ng-click="logInWithProvider('twitter')" ng-disabled="true">
                   <md-icon md-svg-src="images/auth_service_twitter.svg"></md-icon> Twitter
                 </md-button>
               </md-menu-item>
               <md-menu-item>
-                <md-button ng-click="logInWithProvider('github')" disabled="disabled">
+                <md-button ng-click="logInWithProvider('github')" ng-disabled="true">
                   <md-icon md-svg-src="images/auth_service_github.svg"></md-icon> Github
                 </md-button>
               </md-menu-item>
@@ -115,20 +115,6 @@
   </div>
 
   <md-content ng-view></md-content>
-
-  <div style="visibility: hidden">
-    <div class="md-dialog-container" id="myDialog">
-      <md-dialog layout-padding>
-        <md-dialog-content>
-          <h2>Error Authenticating</h2>
-          <p>{{errorInfo}}</p>
-        </md-dialog-content>
-        <md-dialog-actions layout="row">
-          <md-button class="md-raised md-primary" ng-click="closeDialog()" md-autofocus>Close</md-button>
-        </md-dialog-actions>
-      </md-dialog>
-    </div>
-  </div>
 
   <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
 
